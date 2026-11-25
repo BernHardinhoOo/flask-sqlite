@@ -43,19 +43,19 @@
 
 1. Décrivez avec vos mots le trajet d'une requête, du navigateur jusqu'à la base de données, puis le retour.
 
-   > _Ma réponse :_ 
+   > _Le navigateur envoie une requête HTTP (URL), le serveur Flask choisit la route, la fonction Python ouvre la base et exécute le SQL, la base renvoie les lignes, Flask les passe au template HTML, la page générée est renvoyée au navigateur._ 
 
 2. Pourquoi faut-il **fermer** la connexion (`conn.close()`) après chaque requête ?
 
-   > _Ma réponse :_ 
+   > _Une connexion non consomme des ressources et peut verrouiller la base et finit par causer des erreurs_ 
 
 3. Quel est l'avantage d'écrire `row['nom']` plutôt que `row[2]` ? (Pensez à ce qui arriverait si on ajoutait une colonne au milieu de la table.)
 
-   > _Ma réponse :_ 
+   > _row['nom'] est lisible et ne dépend pas de la position. Si on ajoute une colonne au milieu, row[2] pointerait vers une autre donnée sans prévenir, alors que row['nom'] marche toujours_ 
 
 4. Pourquoi est-il préférable de trier avec `ORDER BY` dans la requête SQL plutôt qu'en Python ?
 
-   > _Ma réponse :_ 
+   > _La base est optimisée pour trier (index, rapidité), surtout avec beaucoup de données. En Python, il faudrait tout charger en mémoire avant de trier_ 
 
 ---
 
