@@ -1,12 +1,12 @@
 # 📒 Mon carnet de bord
 
-**Nom :** 
+**savary :** 
 
-**Prénom :** 
+**matteo :** 
 
-**Adresse de mon site :** https://______.pythonanywhere.com
+**Adresse de mon site :** https://bernhardinho.pythonanywhere.com/
 
-**Adresse de mon dépôt GitHub :** https://github.com/______
+**Adresse de mon dépôt GitHub :** https://github.com/BernHardinhoOo/flask-sqlite
 
 > Modifiez ce fichier directement sur GitHub (icône crayon ✏️) pour répondre aux questions de chaque exercice.
 > Écrivez avec vos propres mots : une réponse courte et juste vaut mieux qu'un long copier-coller ! 🙂
@@ -17,23 +17,25 @@
 
 1. Expliquez avec vos mots la différence entre une **table**, une **colonne** et une **ligne**.
 
-   > _Ma réponse :_ 
+   > _Une table est un tableau qui regroupe un type d'objet (les clients). Une colonne est une information commune (nom, prénom). Une ligne est un un objet précis : un client complet._ 
 
 2. À quoi sert la clé primaire `id` ? Pourquoi ne pas simplement identifier un client par son nom ?
 
-   > _Ma réponse :_ 
+   > _L'id identifie chaque ligne de façon unique et stable. Le nom ne convient pas : deux clients peuvent s'appeler pareil, et un nom peut changer_ 
 
 3. Pourquoi votre client ajouté en console est-il apparu sur le site ?
 
-   > _Ma réponse :_ 
+   > _Le site lit la même base de données que la console : dès que la ligne est insérée, la page la récupère et l'affiche._ 
 
 4. Que signifie `NOT NULL` dans `schema.sql` ? Quelle erreur avez-vous obtenue avec `INSERT INTO clients (nom) VALUES ('TEST');` ?
 
-   > _Ma réponse :_ 
+   > _NOT NULL interdit de laisser la colonne vide.Error: stepping, NOT NULL constraint failed: clients.prenom (19)_ 
 
 🧩 **Défi** — mes requêtes / ma solution :
 
-   > 
+   > _SELECT * FROM clients ORDER BY id DESC LIMIT 3;_
+   _SELECT * FROM clients WHERE prenom LIKE 'A%';_
+   _SELECT COUNT(*) FROM clients WHERE adresse LIKE '%Paris%';_
 
 ---
 

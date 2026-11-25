@@ -30,8 +30,11 @@ def get_db():
 
 
 # Fonction pour savoir si l'utilisateur s'est authentifié
-def est_authentifie():
-    return session.get('authentifie')
+def get_db():
+       """Ouvre une connexion à la base de données SQLite."""
+       conn = sqlite3.connect(DATABASE)
+       conn.row_factory = sqlite3.Row  # pour écrire row['nom'] au lieu de row[2]
+       return conn
 
 
 @app.route('/')
