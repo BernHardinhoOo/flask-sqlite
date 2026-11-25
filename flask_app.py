@@ -23,18 +23,16 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour signer les sessio
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(BASE_DIR, 'database.db')
 
-
 def get_db():
     """Ouvre une connexion à la base de données SQLite."""
-    return sqlite3.connect(DATABASE)
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row  # pour écrire row['nom'] au lieu de row[2]
+    return conn
 
 
 # Fonction pour savoir si l'utilisateur s'est authentifié
-def get_db():
-       """Ouvre une connexion à la base de données SQLite."""
-       conn = sqlite3.connect(DATABASE)
-       conn.row_factory = sqlite3.Row  # pour écrire row['nom'] au lieu de row[2]
-       return conn
+def est_authentifie():
+    return session.get('authentifie')
 
 
 @app.route('/')
