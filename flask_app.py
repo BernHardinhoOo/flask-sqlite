@@ -110,6 +110,7 @@ def enregistrer_client():
     # Exécution de la requête SQL pour insérer un nouveau client
     cursor.execute('INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)', (nom, prenom, adresse))
     conn.commit()
+    nouvel_id = cursor.lastrowid
     conn.close()
     return redirect('/consultation/')  # Rediriger vers la liste des clients après l'enregistrement
 
