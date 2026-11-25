@@ -149,6 +149,15 @@ def recherche():
            conn.close()
        return render_template('recherche.html', q=q, data=data)
 
+@app.route('/supprimer_client/<int:id>', methods=['POST'])
+def supprimer_client(id):
+       conn = get_db()
+       cursor = conn.cursor()
+       cursor.execute('DELETE FROM clients WHERE id = ?', (id,))
+       conn.commit()
+       conn.close()
+       return redirect('/consultation/')
+
 
 # ---------------------------------------------------------------
 #  Ne pas modifier : utile seulement pour lancer le site

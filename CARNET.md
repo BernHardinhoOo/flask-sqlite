@@ -107,19 +107,19 @@
 
 1. Que signifie CRUD ? Donnez la requête SQL correspondant à chaque lettre.
 
-   > _Ma réponse :_ 
+   > _RUD = Create (INSERT), Read (SELECT), Update, Delete_ 
 
 2. Que se passe-t-il si l'on oublie le `WHERE` dans un `UPDATE` ou un `DELETE` ? À quoi servent `BEGIN` et `ROLLBACK` ?
 
-   > _Ma réponse :_ 
+   > _Sans WHERE, toutes les lignes sont modifiées ou supprimées. BEGIN ouvre une transaction et ROLLBACK annule les changements non validés : on peut tester sans risque._ 
 
 3. Pourquoi ne faut-il **jamais** supprimer des données avec une requête GET (un simple lien) ? (Indice : les moteurs de recherche et certains navigateurs « visitent » les liens à l'avance.)
 
-   > _Ma réponse :_ 
+   > _Un lien GET peut être « visité » automatiquement (moteurs de recherche, préchargement du navigateur) et supprimerait des données sans intention de l'utilisateur. Une suppression doit passer par POST_ 
 
 4. Une fois un `id` supprimé, pourquoi est-il préférable qu'il ne soit jamais réattribué à un autre client ?
 
-   > _Ma réponse :_ 
+   > _Un id réattribué pourrait rattacher d'anciennes références (commandes, liens, historique) au mauvais client, ce qui crée des confusions ou des erreurs_ 
 
 ---
 
