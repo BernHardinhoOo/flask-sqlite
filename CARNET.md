@@ -87,19 +87,19 @@
 
 1. Quelles étaient les deux anomalies du formulaire d'origine, et d'où venaient-elles ?
 
-   > _Ma réponse :_ 
+   > _la date de creation et l'adresse ne sont pas bon 1002938 au lieu d'une vraie date comme 2026-11-25 14:03:31, parce que la valeur était écrite en dur dans le INSERT. l'Adresse est ICI, parce que le formulaire n'avait pas de champ adresse et que le code mettait une valeur fixe._ 
 
 2. Pourquoi la validation côté **navigateur** (`required`) ne suffit-elle pas ? Pourquoi la garder quand même ?
 
-   > _Ma réponse :_ 
+   > _required est vérifié par le navigateur,l'utilisateur peut le supprimer avec F12 ou envoyer une requête sans le formulaire. Le serveur doit donc toujours revérifier les données. On garde required pour le confort : l'utilisateur est prévenu tout de suite._ 
 
 3. À quoi sert `conn.commit()` ? Que se passe-t-il sans lui ?
 
-   > _Ma réponse :_ 
+   > _commit() valide définitivement les modifications dans la base. Sans lui, l'insertion est annulée quand la connexion se ferme : le client n'est pas enregistré._ 
 
 4. Pourquoi redirige-t-on vers `/consultation/` après l'enregistrement, au lieu d'afficher directement une page ? (Indice : essayez d'appuyer sur F5 après l'envoi.)
 
-   > _Ma réponse :_ 
+   > _Si on affichait une page directement après le POST, appuyer sur F5 renverrait le formulaire et créerait un doublon. Avec la redirection, le navigateur fait un simple GET, et F5 recharge juste la liste._ 
 
 ---
 
