@@ -124,7 +124,7 @@ def fiche_nom(nom):
     return render_template('read_data.html', data=data)
 
 @app.route('/recherche')
-   def recherche():
+def recherche():
        q = request.args.get('q', '').strip()
        data = []
        if q:
