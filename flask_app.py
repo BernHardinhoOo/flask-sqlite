@@ -123,6 +123,13 @@ def fiche_nom(nom):
     conn.close()
     return render_template('read_data.html', data=data)
 
+# Colonnes autorisées pour le tri (liste blanche)
+TRIS_AUTORISES = {
+    'nom': 'nom',
+    'prenom': 'prenom',
+    'created': 'created',
+}
+
 @app.route('/recherche')
 def recherche():
        q = request.args.get('q', '').strip()
