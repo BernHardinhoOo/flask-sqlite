@@ -63,19 +63,19 @@
 
 1. Quelle est la différence entre `WHERE nom = 'DUPONT'` et `WHERE nom LIKE '%DUP%'` ?
 
-   > _Ma réponse :_ 
+   > _= cherche une correspondance exacte. LIKE '%DUP%' trouve tout nom contenant « DUP »_ 
 
 2. Expliquez avec vos mots ce qu'est une **injection SQL**. Qu'est-ce qu'un pirate pourrait faire de pire qu'afficher tous les clients ?
 
-   > _Ma réponse :_ 
+   > _Une injection SQL consiste à glisser du code SQL dans un champ de saisie, qui est alors exécuté. Un pirate peut supprimer des tables, modifier des données, voler des mots de passe ou contourner une connexion_ 
 
 3. Pourquoi la version avec `?` est-elle protégée contre l'injection ?
 
-   > _Ma réponse :_ 
+   > _Avec ?, la valeur est transmise séparément de la requête et traitée comme une simple donnée, jamais comme du code SQL_ 
 
 4. Pour la recherche, on a utilisé `method="get"`. Quel avantage pour l'utilisateur ? (Indice : favoris, partage de lien.)
 
-   > _Ma réponse :_ 
+   > _Avec GET, la recherche est dans l'URL : on peut la mettre en favori, la partager par lien, et revenir en arrière sans renvoyer de formulaire_ 
 
 🧩 **Défi** — mes requêtes / ma solution :
 
