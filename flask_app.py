@@ -112,7 +112,7 @@ def enregistrer_client():
     conn.commit()
     nouvel_id = cursor.lastrowid
     conn.close()
-    return redirect('/consultation/')  # Rediriger vers la liste des clients après l'enregistrement
+    return redirect(url_for('Readfiche', post_id=nouvel_id))
 
 
 # ---------------------------------------------------------------
