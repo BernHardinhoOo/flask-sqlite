@@ -1,17 +1,22 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clients</title>
     <style>
-    table { border-collapse: collapse; }
-    th, td { border: 1px solid #ccc; padding: 6px 12px; }
-    th { background: #f0f0f0; }
-</style>
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 6px 12px; }
+        th { background: #f0f0f0; }
+    </style>
 </head>
 <body>
+    <p><a href="/">Accueil</a></p>
     <h1>Liste des Clients</h1>
-    <p>{{ data|length }} client(s) dans la base.</p>
+    {% if session.get('role') == 'admin' %}
+        <p><a href="/enregistrer_client">➕ Enregistrer un client</a></p>
+    {% endif %}
+    <p>{{ data|length }} client(s) affiché(s).</p>
     <table>
         <tr>
             <th>ID</th>
@@ -19,6 +24,10 @@
             <th>Nom</th>
             <th>Prénom</th>
             <th>Adresse</th>
+            <th>Téléphone</th>
+            {% if session.get('role') == 'admin' %}
+            <th>Actions</th>
+            {% endif %}
         </tr>
         {% for row in data %}
         <tr>
@@ -27,6 +36,16 @@
             <td><a href="/fiche_client/{{ row['id'] }}">{{ row['nom'] }}</a></td>
             <td>{{ row['prenom'] }}</td>
             <td>{{ row['adresse'] }}</td>
+            <td>{{ row['telephone'] or '-' }}</td>
+            {% if session.get('role') == 'admin' %}
+            <td>
+                <a href="/modifier_client/{{ row['id'] }}">✏️ Modifier</a>
+                <form action="/supprimer_client/{{ row['id'] }}" method="post" style="display: inline;"
+                      onsubmit="return confirm('Supprimer ce client ?');">
+                    <button type="submit">🗑️ Supprimer</button>
+                </form>
+            </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

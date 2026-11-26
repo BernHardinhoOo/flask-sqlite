@@ -13,6 +13,8 @@
 import os
 import sqlite3
 
+from migrate_db import creer_comptes_demo
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 connection = sqlite3.connect(os.path.join(BASE_DIR, 'database.db'))
@@ -30,6 +32,21 @@ cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)", ('LAM
 cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)", ('GAGNON', 'Nicolas', '456, Boulevard des Cerisiers, 69003 Lyon'))
 cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)", ('DUBOIS', 'Charlotte', '789, Rue des Roses, 13005 Marseille'))
 cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)", ('LEFEVRE', 'Thomas', '333, Rue de la Paix, 75002 Paris'))
+
+
+# Quelques commandes d'exemple : (client_id, produit, montant)
+commandes = [
+    (2, 'Clavier', 49.90),
+    (2, 'Souris', 19.90),
+    (3, 'Écran', 189.00),
+    (5, 'Casque', 79.00),
+    (5, 'Webcam', 59.00),
+    (5, 'Câble HDMI', 9.90),
+]
+cur.executemany("INSERT INTO commandes (client_id, produit, montant) VALUES (?, ?, ?)", commandes)
+
+# Comptes de démonstration (mots de passe hachés)
+creer_comptes_demo(connection)
 
 connection.commit()
 connection.close()

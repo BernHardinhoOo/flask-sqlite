@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire d'enregistrement d'un nouveau client</title>
-    {% if erreur %}
-       <p style="color: red;">{{ erreur }}</p>
-    {% endif %}
 </head>
 <body>
+    <p><a href="/">Accueil</a></p>
     <h1>Enregistrer un nouveau client</h1>
-    <form action="./enregistrer_client" method="POST">
+    {% if erreur %}
+        <p style="color: red;">{{ erreur }}</p>
+    {% endif %}
+    <form action="{{ url_for('enregistrer_client') }}" method="post">
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" required><br><br>
         <label for="prenom">Prénom :</label>
         <input type="text" id="prenom" name="prenom" required><br><br>
         <label for="adresse">Adresse :</label>
         <input type="text" id="adresse" name="adresse" required><br><br>
+        <label for="telephone">Téléphone (facultatif) :</label>
+        <input type="tel" id="telephone" name="telephone"><br><br>
         <button type="submit">Enregistrer</button>
     </form>
 </body>

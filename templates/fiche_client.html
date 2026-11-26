@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche client</title>
+    <style>
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 6px 12px; }
+        th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <p><a href="/consultation/">← Liste des clients</a></p>
+    <h1>{{ client['prenom'] }} {{ client['nom'] }}</h1>
+    <p><strong>Numéro :</strong> {{ client['id'] }}</p>
+    <p><strong>Adresse :</strong> {{ client['adresse'] }}</p>
+    <p><strong>Téléphone :</strong> {{ client['telephone'] or '-' }}</p>
+    <p><strong>Créé le :</strong> {{ client['created'] }}</p>
+    {% if session.get('role') == 'admin' %}
+        <p><a href="/modifier_client/{{ client['id'] }}">✏️ Modifier</a></p>
+    {% endif %}
+
+    <h2>Commandes</h2>
+    {% if commandes %}
+        <table>
+            <tr><th>Date</th><th>Produit</th><th>Montant</th></tr>
+            {% for c in commandes %}
+            <tr>
+                <td>{{ c['date_commande'] }}</td>
+                <td>{{ c['produit'] }}</td>
+                <td>{{ '%.2f'|format(c['montant']) }} €</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Aucune commande pour ce client.</p>
+    {% endif %}
+
+    {% if session.get('role') == 'admin' %}
+        <h2>Nouvelle commande</h2>
+        <form action="/fiche_client/{{ client['id'] }}/commande" method="post">
+            <label>Produit : <input type="text" name="produit" required></label><br><br>
+            <label>Montant (€) : <input type="number" name="montant" step="0.01" min="0.01" required></label><br><br>
+            <button type="submit">Ajouter la commande</button>
+        </form>
+    {% endif %}
+</body>
+</html>

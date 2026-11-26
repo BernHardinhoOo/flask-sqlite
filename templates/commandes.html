@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commandes</title>
+    <style>
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 6px 12px; }
+        th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <p><a href="/">Accueil</a></p>
+    <h1>Toutes les commandes</h1>
+    <p>{{ commandes|length }} commande(s).</p>
+    <table>
+        <tr><th>N°</th><th>Date</th><th>Client</th><th>Produit</th><th>Montant</th></tr>
+        {% for c in commandes %}
+        <tr>
+            <td>{{ c['id'] }}</td>
+            <td>{{ c['date_commande'] }}</td>
+            <td><a href="/fiche_client/{{ c['client_id'] }}">{{ c['nom'] }} {{ c['prenom'] }}</a></td>
+            <td>{{ c['produit'] }}</td>
+            <td>{{ '%.2f'|format(c['montant']) }} €</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

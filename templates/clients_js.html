@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients (API)</title>
+</head>
+<body>
+    <p><a href="/">Accueil</a></p>
+    <h1>Clients chargés par l'API</h1>
+    <input type="search" id="q" placeholder="Nom ou prénom...">
+    <p id="message">Chargement...</p>
+    <ul id="liste"></ul>
+
+    <script>
+        const champ = document.getElementById('q');
+        const liste = document.getElementById('liste');
+        const message = document.getElementById('message');
+        let derniere = 0;  // pour ignorer les réponses arrivées en retard
+
+        async function charger() {
+            const numero = ++derniere;
+            try {
+                const reponse = await fetch('/api/clients?q=' + encodeURIComponent(champ.value));
+                if (!reponse.ok) throw new Error('code ' + reponse.status);
+                const clients = await reponse.json();
+                if (numero !== derniere) return;
+
+                liste.replaceChildren();
+                for (const client of clients) {
+                    const element = document.createElement('li');
+                    // textContent : le texte n'est jamais interprété comme du HTML
+                    element.textContent = client.nom + ' ' + client.prenom + ' : ' + client.adresse;
+                    liste.appendChild(element);
+                }
+                message.textContent = clients.length + ' client(s).';
+            } catch (erreur) {
+                message.textContent = 'Impossible de charger la liste (' + erreur.message + ').';
+            }
+        }
+
+        champ.addEventListener('input', charger);
+        charger();
+    </script>
+</body>
+</html>
